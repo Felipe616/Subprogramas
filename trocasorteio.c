@@ -26,19 +26,19 @@ void transforma(char frase[] , int qtde_sorteios){
 
     int len,i,x;
     len=strlen(frase);
+    srand( (unsigned)time(NULL) );
 
     for (i=0;i<qtde_sorteios;i++){
 
-        x = ( rand() % len );
-        printf("%d\t%c\n",x,frase[x]);
+        x = 1 +( rand() % len-1 );
 
         if (frase[x]>64&&frase[x]<91){
 
-            tolower(frase[x]);
+            frase[x]+=32;
 
         }else if (frase[x]>96&&frase[x]<123){
 
-            toupper(frase[x]);
+            frase[x]-=32;
 
         }
 
