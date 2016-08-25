@@ -9,40 +9,44 @@ void decode_cesar (char[],int);
 
 int main (){
 
-    int n,p;
+    int n=2,p;
     char msg[10000];
 
-    printf("\n\t\t\tMENU\n1 - CODIFICAR\n2 - DECODIFICAR\n3 - SAIR\n");
+    while (n!=3){
+        printf("\n\t\t\tMENU\n1 - CODIFICAR\n2 - DECODIFICAR\n3 - SAIR\n");
 
-    scanf ("%d",&n);
-    fflush(stdin);
+        scanf ("%d",&n);
+        fflush(stdin);
 
-    switch (n){
-        case 1:
+        switch (n){
+            case 1:
 
-            printf("Digite a mensagem a ser codificada e o numero de posicoes: \n");
-            scanf("%[^\n]s",msg);
-            scanf("%d",&p);
+                printf("Digite a mensagem a ser codificada e o numero de posicoes: \n");
+                scanf("%[^\n]s",msg);
+                scanf("%d",&p);
 
-            //printf("%s\t%d",msg,p);
+                //printf("%s\t%d",msg,p);
 
-            code_cesar(msg,p);
+                code_cesar(msg,p);
 
 
-            break;
-        case 2:
+                break;
+            case 2:
 
-            printf("Digite a mensagem a ser decodificada e o numero de posicoes: \n");
-            scanf("%[^\n]s",msg);
-            scanf("%d",&p);
+                printf("Digite a mensagem a ser decodificada e o numero de posicoes: \n");
+                scanf("%[^\n]s",msg);
+                scanf("%d",&p);
 
-            decode_cesar(msg,p);
+                decode_cesar(msg,p);
 
-            break;
-        case 3:
+                break;
+            case 3:
 
-            return 1;
+                return 1;
+        }
     }
+
+
 
 
     return 0;
