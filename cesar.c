@@ -6,6 +6,8 @@ void code_cesar(char[], int);
 
 void decode_cesar (char[],int);
 
+int uppercase (char);
+
 
 int main (){
 
@@ -25,7 +27,7 @@ int main (){
                 scanf("%[^\n]s",msg);
                 scanf("%d",&p);
 
-                //printf("%s\t%d",msg,p);
+
 
                 code_cesar(msg,p);
 
@@ -42,7 +44,7 @@ int main (){
                 break;
             case 3:
 
-                return 1;
+                return 0;
         }
     }
 
@@ -54,48 +56,81 @@ int main (){
 
 
 void code_cesar(char mensagem[], int posicoes){
-
-    int j,len;
-
+    int i,len,d;
     len=strlen(mensagem);
 
+    for (i=0; i<len; i++){
 
-    for (j=0;j<len;j++){
-        if (mensagem[j]!=90&&mensagem[j]!=122&&mensagem[j]!=32){
-            mensagem[j]+=posicoes;
-        }else if (mensagem[j]==90){
-            mensagem[j]=64;
-            mensagem[j]+=posicoes;
+        if (uppercase(mensagem[i]) >= 0){
 
-        }else if (mensagem[j]==122){
-            mensagem[j]=96;
-            mensagem[j]+=posicoes;
+            d = posicoes;
+
+            if (uppercase(mensagem[i]) == 0){
+
+                if (mensagem[i] + d > 122){
+                    d = d - (123 - mensagem[i]);
+                    mensagem[i]='a';
+                }
+
+            }else if (uppercase(mensagem[i]) == 1){
+                if (mensagem[i] + d > 90)
+                    d = d - (91 - mensagem[i]);
+                    mensagem[i]='A';
+            }
+
+            mensagem[i] = mensagem[i] + d;
+
         }
+
     }
-    printf("%s\n",mensagem);
+
+    printf("Codificado: %s\n", mensagem);
 
 }
 
 
 void decode_cesar(char mensagem[], int posicoes){
-
-    int j,len;
-
+    int i,len,d;
     len=strlen(mensagem);
 
+    for (i=0; i<len; i++){
 
-    for (j=0;j<len;j++){
-        if (mensagem[j]!=90&&mensagem[j]!=122&&mensagem[j]!=32){
-            mensagem[j]-=posicoes;
-        }else if (mensagem[j]==90){
-            mensagem[j]=64;
-            mensagem[j]-=posicoes;
+        if (uppercase(mensagem[i]) >= 0){
 
-        }else if (mensagem[j]==122){
-            mensagem[j]=96;
-            mensagem[j]-=posicoes;
+            d = posicoes;
+
+            if (uppercase(mensagem[i]) == 0){
+
+                if (mensagem[i] - d < 97){
+                    d = d - (mensagem[i] - 96);
+                    mensagem[i]='z';
+                }
+
+            }else if (uppercase(mensagem[i]) == 1){
+                if (mensagem[i] - d < 65)
+                    d = d - (mensagem[i] - 64);
+                    mensagem[i]='Z';
+            }
+
+            mensagem[i] = mensagem[i] - d;
+
         }
-    }
-    printf("%s\n",mensagem);
 
+    }
+
+    printf("Decodificado: %s\n", mensagem);
+
+
+}
+
+int uppercase(char ch){
+    if (ch>64&&ch<91){
+        return 1;
+
+    }else if (ch>96&&ch<123){
+        return 0;
+    }else {
+
+    return -1;
+    }
 }
